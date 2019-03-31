@@ -1,0 +1,19 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+dependencies {
+    compileOnly deps.lint.api
+    compileOnly deps.kotlin.stdlib
+
+    testImplementation deps.lint.core
+    testImplementation deps.lint.tests
+}
+
+jar {
+    manifest {
+        attributes('Lint-Registry-v2': 'com.balazsruda.lintchecks.common.IssueRegistry')
+    }
+}
