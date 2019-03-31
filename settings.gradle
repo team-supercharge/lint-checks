@@ -1,0 +1,4 @@
+include ':lint-checks-android',
+        ':lint-checks-common',
+        ':lint-checks-android-rules',
+        ':lint-checks-common-rules'

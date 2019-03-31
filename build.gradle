@@ -1,0 +1,66 @@
+apply plugin: 'com.vanniktech.code.quality.tools'
+
+buildscript {
+    ext.versions = [
+            kotlin: '1.3.21',
+            minSdk: 16,
+            compileSdk: 28,
+            lint: '26.4.0',
+    ]
+
+    ext.deps = [
+            'kotlin': [
+                    'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21",
+            ],
+            'lint': [
+                    'core': "com.android.tools.lint:lint:26.4.0",
+                    'api': "com.android.tools.lint:lint-api:26.4.0",
+                    'tests': "com.android.tools.lint:lint-tests:26.4.0",
+            ],
+    ]
+
+    repositories {
+        google()
+        jcenter()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
+        classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.18.0'
+
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC14"
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+codeQualityTools {
+    ktlint {
+        toolVersion = '0.30.0'
+    }
+    detekt {
+        toolVersion = '1.0.0-RC12'
+    }
+    lint {
+        warningsAsErrors = false
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        maven {
+            url 'http://localhost:8081/artifactory/ext-release-local'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
