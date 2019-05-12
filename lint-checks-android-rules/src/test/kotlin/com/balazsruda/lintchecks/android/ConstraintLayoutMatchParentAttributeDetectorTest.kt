@@ -6,6 +6,7 @@ import org.junit.Test
 
 class ConstraintLayoutMatchParentAttributeDetectorTest {
 
+    // xml syntax helper as well!
     @Test fun `match_parent is used among children of a ConstraintLayout`() {
     lint()
         .files(xml("res/layout/layout.xml", """
