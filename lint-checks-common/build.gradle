@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-version = "0.1.0"
+afterEvaluate {
+    generateReleaseBuildConfig.enabled = false
+}
+
+version = "0.1.1"
 
 android {
     compileSdkVersion versions.compileSdk
@@ -12,12 +16,16 @@ android {
     }
 }
 
-dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.21"
+repositories {
+    maven {
+        url 'http://localhost:8081/artifactory/ext-release-local'
+    }
+}
 
-    lintChecks project(':lint-checks-common-rules')
+dependencies {
+    lintPublish project(':lint-checks-common-rules')
 }
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
-apply from: 'install.gradle'
+apply from: 'deploy.gradle'

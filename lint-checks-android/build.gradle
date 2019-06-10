@@ -1,6 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+afterEvaluate {
+    generateReleaseBuildConfig.enabled = false
+}
+
 android {
     compileSdkVersion versions.compileSdk
 
@@ -10,8 +14,5 @@ android {
 }
 
 dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.21"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
-    lintChecks project(':lint-checks-android-rules')
+    lintPublish project(':lint-checks-android-rules')
 }

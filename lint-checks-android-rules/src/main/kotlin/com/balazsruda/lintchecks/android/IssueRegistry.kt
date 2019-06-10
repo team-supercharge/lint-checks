@@ -9,7 +9,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
 
     override val issues
         get() = listOf(
-            ISSUE_ANDROID_UTIL_LOG_USAGE,
             ISSUE_CONSTRAINT_LAYOUT_MATCH_PARENT_ATTRIBUTE_DETECTOR
         )
 }
