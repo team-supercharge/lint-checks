@@ -39,26 +39,18 @@ val ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS = Issue.create(
 
 class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.UastScanner {
     override fun getApplicableUastTypes() = listOf(
-        UForEachExpression::class.java,
-        UForExpression::class.java,
         UIfExpression::class.java,
+        USwitchExpression::class.java,
+        UForExpression::class.java,
+        UForEachExpression::class.java,
         UWhileExpression::class.java,
         UDoWhileExpression::class.java,
-        USwitchExpression::class.java,
         UTryExpression::class.java
     )
 
     override fun createUastHandler(context: JavaContext) = MethodBlocksHandler(context)
 
     class MethodBlocksHandler(private val context: JavaContext) : UElementHandler() {
-
-        override fun visitForEachExpression(node: UForEachExpression) {
-            checkWhiteSpaceAroundBlock(node)
-        }
-
-        override fun visitForExpression(node: UForExpression) {
-            checkWhiteSpaceAroundBlock(node)
-        }
 
         override fun visitIfExpression(node: UIfExpression) {
             if (node.thenExpression !is UBlockExpression) {
@@ -68,25 +60,27 @@ class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.Uast
             checkWhiteSpaceAroundBlock(node)
         }
 
-        override fun visitWhileExpression(node: UWhileExpression) {
+        override fun visitSwitchExpression(node: USwitchExpression) =
             checkWhiteSpaceAroundBlock(node)
-        }
 
-        override fun visitDoWhileExpression(node: UDoWhileExpression) {
+        override fun visitForExpression(node: UForExpression) =
             checkWhiteSpaceAroundBlock(node)
-        }
 
-        override fun visitSwitchExpression(node: USwitchExpression) {
+        override fun visitForEachExpression(node: UForEachExpression) =
             checkWhiteSpaceAroundBlock(node)
-        }
 
-        override fun visitTryExpression(node: UTryExpression) {
+        override fun visitWhileExpression(node: UWhileExpression) =
             checkWhiteSpaceAroundBlock(node)
-        }
+
+        override fun visitDoWhileExpression(node: UDoWhileExpression) =
+            checkWhiteSpaceAroundBlock(node)
+
+        override fun visitTryExpression(node: UTryExpression) =
+            checkWhiteSpaceAroundBlock(node)
 
         private fun checkWhiteSpaceAroundBlock(node: UElement) {
-            checkWhiteSpaceAroundBlock(node, true)
-            checkWhiteSpaceAroundBlock(node, false)
+            checkWhiteSpaceAroundBlock(node, forward = true)
+            checkWhiteSpaceAroundBlock(node, forward = false)
         }
 
         private fun checkWhiteSpaceAroundBlock(node: UElement, forward: Boolean) {
@@ -99,7 +93,7 @@ class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.Uast
             context.report(
                 ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS,
                 context.getLocation(firstRelevantWhiteSpaceNode),
-                String.format("Block statement isn't %s by empty line.", if (forward) "followed" else "preceded"),
+                "Block statement isn't ${if (forward) "followed" else "preceded"} by empty line.",
                 createQuickFix()
             )
         }
@@ -142,7 +136,7 @@ class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.Uast
             .replace()
             .text("\n")
             .with("\n\n")
-            .autoFix(true, true)
+            .autoFix()
             .build()
 
     }
