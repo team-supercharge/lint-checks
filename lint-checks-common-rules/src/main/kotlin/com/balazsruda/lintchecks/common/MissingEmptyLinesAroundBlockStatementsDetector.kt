@@ -12,6 +12,7 @@ import com.android.tools.lint.detector.api.Severity
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
+import java.util.EnumSet
 import org.jetbrains.kotlin.psi.psiUtil.siblings
 import org.jetbrains.uast.UBlockExpression
 import org.jetbrains.uast.UDoWhileExpression
@@ -23,7 +24,6 @@ import org.jetbrains.uast.UIfExpression
 import org.jetbrains.uast.USwitchExpression
 import org.jetbrains.uast.UTryExpression
 import org.jetbrains.uast.UWhileExpression
-import java.util.*
 
 val ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS = Issue.create(
     "MissingEmptyLinesAroundBlockStatements",
@@ -138,6 +138,5 @@ class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.Uast
             .with("\n\n")
             .autoFix()
             .build()
-
     }
 }
