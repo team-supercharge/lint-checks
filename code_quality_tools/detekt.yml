@@ -86,7 +86,7 @@ complexity:
     active: false
     ignoredLabels: ""
   LargeClass:
-    active: true
+    active: false
     threshold: 600
   LongMethod:
     active: true
@@ -347,7 +347,7 @@ style:
   MandatoryBracesIfStatements:
     active: true
   MaxLineLength:
-    active: true
+    active: false
     maxLineLength: 120
     excludePackageStatements: true
     excludeImportStatements: true

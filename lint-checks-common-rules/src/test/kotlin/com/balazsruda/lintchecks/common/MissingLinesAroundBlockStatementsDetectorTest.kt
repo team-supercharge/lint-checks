@@ -349,7 +349,6 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             .expectClean()
     }
 
-
     @Test
     fun `no missing empty line around Elvis operator in Kotlin`() {
         lint()
@@ -616,7 +615,6 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             """.trimMargin()
             )
     }
-
 
     @Test
     fun `no missing empty line before if block statement when it's in the expression body of a method in Kotlin`() {
