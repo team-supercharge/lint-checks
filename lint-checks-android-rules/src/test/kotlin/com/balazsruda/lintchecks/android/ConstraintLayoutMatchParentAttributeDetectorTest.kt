@@ -4,6 +4,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
+@SuppressWarnings("MaxLineLength")
 class ConstraintLayoutMatchParentAttributeDetectorTest {
 
     @Test fun `match_parent is used among children of a ConstraintLayout`() {
