@@ -50,6 +50,7 @@ class MissingEmptyLinesAroundBlockStatementsDetector : Detector(), Detector.Uast
 
     override fun createUastHandler(context: JavaContext) = MethodBlocksHandler(context)
 
+    @SuppressWarnings("TooManyFunctions")
     class MethodBlocksHandler(private val context: JavaContext) : UElementHandler() {
 
         override fun visitIfExpression(node: UIfExpression) {
