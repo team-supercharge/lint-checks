@@ -17,4 +17,4 @@ dependencies {
     lintPublish project(':lint-checks-common-rules')
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply plugin: "com.vanniktech.maven.publish"
