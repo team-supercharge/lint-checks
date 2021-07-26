@@ -5,6 +5,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
+@SuppressWarnings("MaxLineLength", "LargeClass")
 class MissingLinesAroundBlockStatementsDetectorTest {
 
     @Test
