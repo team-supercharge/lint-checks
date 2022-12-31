@@ -32,7 +32,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
 
     override fun visitAttribute(context: XmlContext, attribute: Attr) {
 
-        if (attribute.ownerElement.parentNode.nodeName != SdkConstants.CLASS_CONSTRAINT_LAYOUT.defaultName()) {
+        if (!attribute.ownerElement.parentNode.nodeName.startsWith(SdkConstants.ANDROIDX_CONSTRAINT_LAYOUT_PKG)) {
             return
         }
 
@@ -61,7 +61,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
         )
     }
 
-    private fun createFix(attribute: Attr, constraintOne: String, constraintTwo: String): LintFix? {
+    private fun createFix(attribute: Attr, constraintOne: String, constraintTwo: String): LintFix {
         val build = fix()
             .alternatives()
             .add(createSimpleFix(attribute))
@@ -80,7 +80,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
         constraintOne: String,
         constraintTwo: String,
         attribute: Attr
-    ): LintFix? {
+    ): LintFix {
         return fix()
             .composite()
             .name("Replace \"match_parent\" with \"0dp\" and parent constraints")

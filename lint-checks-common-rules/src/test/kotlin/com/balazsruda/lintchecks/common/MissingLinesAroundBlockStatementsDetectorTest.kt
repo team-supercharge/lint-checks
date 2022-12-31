@@ -1,8 +1,8 @@
 package com.balazsruda.lintchecks.common
 
 import com.android.tools.lint.checks.infrastructure.TestFiles
-import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 @SuppressWarnings("MaxLineLength", "LargeClass")
@@ -12,7 +12,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
     fun `missing empty line before for block statement in Java`() {
         lint()
             .files(
-                java(
+                TestFiles.java(
                     """
           package foo;
 
@@ -35,14 +35,16 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |    boolean bar;
             |                ^
             |0 errors, 1 warnings
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
             .expectFixDiffs(
                 """
             |Fix for src/foo/Example.java line 6: Add extra line:
             |@@ -7 +7
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -50,7 +52,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
     fun `missing empty line before if block statement in Java`() {
         lint()
             .files(
-                java(
+                TestFiles.java(
                     """
           package foo;
 
@@ -66,6 +68,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 ).indented()
             )
             .issues(ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS)
+            .skipTestModes(TestMode.BODY_REMOVAL)
             .run()
             .expect(
                 """
@@ -73,14 +76,16 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |    boolean bar;
             |                ^
             |0 errors, 1 warnings
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
             .expectFixDiffs(
                 """
             |Fix for src/foo/Example.java line 6: Add extra line:
             |@@ -7 +7
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -112,14 +117,16 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |        val i = 0
             |                 ^
             |0 errors, 1 warnings
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
             .expectFixDiffs(
                 """
             |Fix for src/foo/Example.kt line 6: Add extra line:
             |@@ -7 +7
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -150,14 +157,16 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |        }
             |         ^
             |0 errors, 1 warnings
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
             .expectFixDiffs(
                 """
             |Fix for src/foo/Example.kt line 8: Add extra line:
             |@@ -9 +9
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -188,14 +197,16 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |        }
             |         ^
             |0 errors, 1 warnings
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
             .expectFixDiffs(
                 """
             |Fix for src/foo/Example.kt line 8: Add extra line:
             |@@ -9 +9
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -234,7 +245,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |Fix for src/foo/Example.kt line 8: Add extra line:
             |@@ -9 +9
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -279,7 +291,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |Fix for src/foo/Example.kt line 9: Add extra line:
             |@@ -10 +10
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -392,6 +405,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 ).indented()
             )
             .issues(ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS)
+            .skipTestModes(TestMode.BODY_REMOVAL)
+            .skipTestModes(TestMode.IF_TO_WHEN)
             .run()
             .expectClean()
     }
@@ -415,6 +430,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 ).indented()
             )
             .issues(ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS)
+            .skipTestModes(TestMode.BODY_REMOVAL)
             .run()
             .expectClean()
     }
@@ -525,7 +541,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |Fix for src/foo/Example.kt line 6: Add extra line:
             |@@ -7 +7
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -762,6 +779,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 ).indented()
             )
             .issues(ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS)
+            .skipTestModes(TestMode.BODY_REMOVAL)
             .run()
             .expect(
                 """|
@@ -825,6 +843,7 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 ).indented()
             )
             .issues(ISSUE_MISSING_EMPTY_LINES_AROUND_BLOCK_STATEMENTS)
+            .skipTestModes(TestMode.BODY_REMOVAL)
             .run()
             .expect(
                 """
@@ -845,7 +864,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
             |Fix for src/foo/Test.kt line 7: Add extra line:
             |@@ -8 +8
             |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -892,7 +912,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 |Fix for src/foo/Test.kt line 11: Add extra line:
                 |@@ -12 +12
                 |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -942,7 +963,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 |Fix for src/foo/Test.kt line 14: Add extra line:
                 |@@ -15 +15
                 |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 
@@ -990,7 +1012,8 @@ class MissingLinesAroundBlockStatementsDetectorTest {
                 |Fix for src/foo/Test.java line 12: Add extra line:
                 |@@ -13 +13
                 |+
-            |""".trimMargin()
+            |
+            """.trimMargin()
             )
     }
 }

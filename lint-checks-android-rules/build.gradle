@@ -1,15 +1,17 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
-targetCompatibility = JavaVersion.VERSION_1_8
-sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_11
 
 dependencies {
     compileOnly deps.lint.api
     compileOnly deps.kotlin.stdlib
+    compileOnly deps.kotlin.reflect
 
     testImplementation deps.lint.core
     testImplementation deps.lint.tests
+    testImplementation "junit:junit:${versions.junit}"
 }
 
 jar {
