@@ -33,7 +33,7 @@ lintChecks(
 
 # License
 
-`lint-checks` is opensource, contribution and feedback are welcome!
+`lint-checks` is open source, contribution and feedback are welcome!
 
 [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
