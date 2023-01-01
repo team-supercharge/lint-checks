@@ -8,7 +8,7 @@ buildscript {
             androidTools       : '30.3.1',
             detekt             : '1.22.0',
             androidGradlePlugin: '7.3.1',
-            publishPlugin      : '0.17.0',
+            publishPlugin      : '0.23.1',
             junit              : '4.13.2'
     ]
 
