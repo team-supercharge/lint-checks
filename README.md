@@ -10,10 +10,19 @@ It contains two set of Android Lint checks:
 
 Get the latest artifact via gradle
 ```groovy
-implementation 'io.supercharge:lint-checks-common-rules:0.3.0'
+implementation 'io.supercharge:lint-checks-common-rules:0.4.0'
 ```
 ```groovy
-implementation 'io.supercharge:lint-checks-android-rules:0.3.0'
+implementation 'io.supercharge:lint-checks-android-rules:0.4.0'
+```
+
+or
+
+```groovy
+lintChecks(
+        'io.supercharge:lint-checks-common-rules-pure:0.4.0',
+        'io.supercharge:lint-checks-android-rules-pure:0.4.0'
+) 
 ```
 
 # Inspiration
