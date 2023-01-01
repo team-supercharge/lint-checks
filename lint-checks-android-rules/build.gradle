@@ -5,6 +5,7 @@ targetCompatibility = JavaVersion.VERSION_11
 sourceCompatibility = JavaVersion.VERSION_11
 
 dependencies {
+    compileOnly project(":lint-checks-constants")
     compileOnly deps.lint.api
     compileOnly deps.kotlin.stdlib
     compileOnly deps.kotlin.reflect

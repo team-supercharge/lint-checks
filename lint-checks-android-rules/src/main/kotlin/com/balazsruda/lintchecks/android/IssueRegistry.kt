@@ -2,8 +2,10 @@ package com.balazsruda.lintchecks.android
 
 import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
-
-internal const val DEFAULT_PRIORITY = 10 // Can be ignored
+import com.balazsruda.lintchecks.constants.VENDOR_CONTACT
+import com.balazsruda.lintchecks.constants.VENDOR_FEEDBACK_URL
+import com.balazsruda.lintchecks.constants.VENDOR_IDENTIFIER
+import com.balazsruda.lintchecks.constants.VENDOR_NAME
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
     override val api = CURRENT_API
@@ -15,9 +17,9 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
 
     override val vendor: Vendor
         get() = Vendor(
-            vendorName = "Team Supercharge",
-            identifier = "lint-checks",
-            feedbackUrl = "https://github.com/team-supercharge/lint-checks/issues",
-            contact = "https://github.com/team-supercharge/lint-checks"
+            vendorName = VENDOR_NAME,
+            identifier = VENDOR_IDENTIFIER,
+            feedbackUrl = VENDOR_FEEDBACK_URL,
+            contact = VENDOR_CONTACT
         )
 }
