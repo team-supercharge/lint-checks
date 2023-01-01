@@ -6,6 +6,7 @@ afterEvaluate {
 }
 
 android {
+    namespace 'com.balazsruda.lintchecks.common'
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
