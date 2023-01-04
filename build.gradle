@@ -1,20 +1,27 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 buildscript {
     ext.versions = [
-            kotlin: '1.5.20',
-            minSdk: 21,
-            compileSdk: 30,
-            androidTools: '27.2.2',
+            kotlin             : '1.7.20',
+            minSdk             : 23,
+            compileSdk         : 33,
+            androidTools       : '30.3.1',
+            detekt             : '1.22.0',
+            androidGradlePlugin: '7.3.1',
+            publishPlugin      : '0.23.1',
+            junit              : '4.13.2'
     ]
 
     ext.deps = [
             'kotlin': [
-                    'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
+                    'stdlib' : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
+                    'reflect': "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin}",
             ],
-            'lint': [
-                    'core': "com.android.tools.lint:lint:${versions.androidTools}",
-                    'api': "com.android.tools.lint:lint-api:${versions.androidTools}",
+            'lint'  : [
+                    'core'  : "com.android.tools.lint:lint:${versions.androidTools}",
+                    'api'   : "com.android.tools.lint:lint-api:${versions.androidTools}",
                     'checks': "com.android.tools.lint:lint-checks:${versions.androidTools}",
-                    'tests': "com.android.tools.lint:lint-tests:${versions.androidTools}",
+                    'tests' : "com.android.tools.lint:lint-tests:${versions.androidTools}",
             ],
     ]
 
@@ -25,17 +32,17 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath "com.android.tools.build:gradle:${versions.androidGradlePlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.1"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${versions.detekt}"
 
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+        classpath "com.vanniktech:gradle-maven-publish-plugin:${versions.publishPlugin}"
     }
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.17.1")
+    id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
 def projectSource = file(projectDir)
@@ -44,7 +51,7 @@ def kotlinFiles = "**/*.kt"
 def resourceFiles = "**/resources/**"
 def buildFiles = "**/build/**"
 
-tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt) {
+tasks.register("detektAll", Detekt) {
     def autoFix = project.hasProperty('detektAutoFix')
 
     description = "Custom DETEKT build for all modules"
@@ -63,7 +70,7 @@ tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt) {
 }
 
 dependencies {
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.17.1"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${versions.detekt}"
 }
 
 allprojects {

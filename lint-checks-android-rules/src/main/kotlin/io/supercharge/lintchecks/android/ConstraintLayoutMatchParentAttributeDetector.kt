@@ -1,4 +1,4 @@
-package com.balazsruda.lintchecks.android
+package io.supercharge.lintchecks.android
 
 import com.android.SdkConstants
 import com.android.SdkConstants.VALUE_MATCH_CONSTRAINT
@@ -11,6 +11,7 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.XmlContext
+import io.supercharge.lintchecks.constants.DEFAULT_PRIORITY
 import org.w3c.dom.Attr
 
 val ISSUE_CONSTRAINT_LAYOUT_MATCH_PARENT_ATTRIBUTE_DETECTOR = Issue.create(
@@ -32,7 +33,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
 
     override fun visitAttribute(context: XmlContext, attribute: Attr) {
 
-        if (attribute.ownerElement.parentNode.nodeName != SdkConstants.CLASS_CONSTRAINT_LAYOUT.defaultName()) {
+        if (!attribute.ownerElement.parentNode.nodeName.startsWith(SdkConstants.ANDROIDX_CONSTRAINT_LAYOUT_PKG)) {
             return
         }
 
@@ -61,7 +62,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
         )
     }
 
-    private fun createFix(attribute: Attr, constraintOne: String, constraintTwo: String): LintFix? {
+    private fun createFix(attribute: Attr, constraintOne: String, constraintTwo: String): LintFix {
         val build = fix()
             .alternatives()
             .add(createSimpleFix(attribute))
@@ -80,7 +81,7 @@ class ConstraintLayoutMatchParentAttributeDetector : LayoutDetector() {
         constraintOne: String,
         constraintTwo: String,
         attribute: Attr
-    ): LintFix? {
+    ): LintFix {
         return fix()
             .composite()
             .name("Replace \"match_parent\" with \"0dp\" and parent constraints")

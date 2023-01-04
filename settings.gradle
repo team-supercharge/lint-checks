@@ -1,4 +1,5 @@
-include ':lint-checks-android',
+include ':lint-checks-constants',
+        ':lint-checks-android',
         ':lint-checks-common',
         ':lint-checks-android-rules',
         ':lint-checks-common-rules'

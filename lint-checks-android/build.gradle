@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 afterEvaluate {
     generateReleaseBuildConfig.enabled = false
 }
 
 android {
+    namespace 'io.supercharge.lintchecks.android'
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
