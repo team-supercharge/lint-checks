@@ -1,4 +1,4 @@
-package com.balazsruda.lintchecks.android
+package io.supercharge.lintchecks.android
 
 import com.android.SdkConstants
 import com.android.SdkConstants.VALUE_MATCH_CONSTRAINT
@@ -11,7 +11,7 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.XmlContext
-import com.balazsruda.lintchecks.constants.DEFAULT_PRIORITY
+import io.supercharge.lintchecks.constants.DEFAULT_PRIORITY
 import org.w3c.dom.Attr
 
 val ISSUE_CONSTRAINT_LAYOUT_MATCH_PARENT_ATTRIBUTE_DETECTOR = Issue.create(

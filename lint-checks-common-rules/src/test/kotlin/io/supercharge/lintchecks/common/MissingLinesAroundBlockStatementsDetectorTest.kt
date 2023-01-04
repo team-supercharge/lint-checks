@@ -1,4 +1,4 @@
-package com.balazsruda.lintchecks.common
+package io.supercharge.lintchecks.common
 
 import com.android.tools.lint.checks.infrastructure.TestFiles
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint

@@ -17,7 +17,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes('Lint-Registry-v2': 'com.balazsruda.lintchecks.android.IssueRegistry')
+        attributes('Lint-Registry-v2': 'io.supercharge.lintchecks.android.IssueRegistry')
     }
 }
 

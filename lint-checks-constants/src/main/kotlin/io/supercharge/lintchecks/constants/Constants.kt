@@ -1,4 +1,4 @@
-package com.balazsruda.lintchecks.constants
+package io.supercharge.lintchecks.constants
 
 const val DEFAULT_PRIORITY = 10 // Can be ignored
 const val VENDOR_NAME = "Team Supercharge"
